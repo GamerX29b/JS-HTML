@@ -27,15 +27,6 @@ type="button" >добавить новую запись</button>
 
 	var d = document;
 	var name
-
-    name = ИМЯ
-            function getParentNode(oThis, sNodeName) {
-                while(oThis.nodeName != sNodeName && oThis.nodeName != 'BODY' )  {
-                    oThis=oThis.parentNode;
-                }
-                return oThis.nodeName!='BODY'?oThis:null;
-            }   
-	
 	
 function add(done){
 
@@ -53,27 +44,31 @@ function add(done){
     row.appendChild(td2);
     row.appendChild(td3);
 
-	var checkbox = document.createElement('input');
-	checkbox.type = "checkbox";
-	checkbox.value = "value";
-	checkbox.onchange = function()
+	var checkboxe = document.createElement('input');
+	checkboxe.type = "checkbox";
+	checkboxe.value = "value";
+	checkboxe.id = row.rowIndex
+	checkboxe.onchange = function()
 		{
-		if (checkbox(this).checked){
-		tbody.setAttribute('style', 'background-attachment: #ffff00');
+			alert(td3.cellIndex);
+		if (checkboxe.indexOf(row.rowIndex).checked){
+			alert("Установлено");
+		td3.setAttribute('style', 'background-attachment: #ffff00');
 		}else{
-		tbody.setAttribute('style', 'background-attachment: #ffffff');
+			alert("Снято");
+		td3.setAttribute('style', 'background-attachment: #ffffff');
 		}}
 	
 	var delbutton = document.createElement("BUTTON");
 	delbutton.innerHTML = "удалить";
 	delbutton.onclick = function()
 		{
-			tbody.deleteRow(this);
+			tbody.deleteRow(row.rowIndex);
 		}
-		var alpha = 1-1;
+		var alpha = row.rowIndex;
     td1.innerHTML = alpha;
     td2.innerHTML = "done";
-	td3.appendChild(checkbox);
+	td3.appendChild(checkboxe);
 	td3.appendChild(delbutton);
 	
 }
