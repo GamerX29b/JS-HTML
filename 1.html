@@ -6,7 +6,7 @@
 table 
 <table id = "oneTable" class ="tables" solid = "grey" border = "1px" style = "background-color:#008000" >
 <tr><th>номер</th><th>имя</th><th>действие</th></tr>
-<tr><td value = "data">Нет данных</td><td>Нет данных</td><td>Нет данных</td></tr>
+<tr><td value = "data" id = "default">Нет данных</td></tr>
 <tbody></tbody>
 </table>
 </p>
@@ -15,8 +15,8 @@ table
 	document.getElementById('oneTable').style.backgroundColor = '#808080'" type="button" 
 >цвет</button>
 
-<button onclick = "clear()" >очистить всё</button>
-<button onclick = "delete()" type="button" >удалить всё</button>
+<button onclick = "clearAlls()" type = "button" >очистить всё</button>
+<button onclick = "clear()">удалить всё</button>
 <button 
 onclick = "add('done')"
 type="button" >добавить новую запись</button>
@@ -25,12 +25,25 @@ type="button" >добавить новую запись</button>
 
 <script>
 
+function clearAlls(){
+	var el = document.getElementById("oneTable");
+	el.setAttribute('style', 'background-color: #008000');
+	
+	var uncheck=document.getElementsByTagName('input');
+	 for(var i=0;i<uncheck.length;i++)
+	 {
+	  if(uncheck[i].type=='checkbox')
+	  {
+	   uncheck[i].checked=false;
+	  }
+	 }
+}
+
+
 	var d = document;
 	var name
 	
 function add(done){
-
-	
     var tbody = d.getElementById('oneTable').getElementsByTagName('TBODY')[0];
 
     var row = d.createElement("TR");
@@ -50,13 +63,10 @@ function add(done){
 	checkboxe.id = row.rowIndex
 	checkboxe.onchange = function()
 		{
-			alert(td3.cellIndex);
-		if (checkboxe.indexOf(row.rowIndex).checked){
-			alert("Установлено");
-		td3.setAttribute('style', 'background-attachment: #ffff00');
-		}else{
-			alert("Снято");
-		td3.setAttribute('style', 'background-attachment: #ffffff');
+		if (checkboxe.checked){			
+		td3.setAttribute('style', 'background-color: #ffff00');
+		}else{			
+		td3.setAttribute('style', 'background-color: #008000');
 		}}
 	
 	var delbutton = document.createElement("BUTTON");
@@ -66,8 +76,13 @@ function add(done){
 			tbody.deleteRow(row.rowIndex);
 		}
 		var alpha = row.rowIndex;
+		
+		var element = document.getElementById("default");
+		if(element != null){
+		element.parentNode.removeChild(element);
+		}
     td1.innerHTML = alpha;
-    td2.innerHTML = "done";
+    td2.innerHTML = "ИМЯ";
 	td3.appendChild(checkboxe);
 	td3.appendChild(delbutton);
 	
