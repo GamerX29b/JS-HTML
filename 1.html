@@ -26,17 +26,15 @@ type="button" >добавить новую запись</button>
 <script>
 
 function clearAlls(){
+	
 	var el = document.getElementById("oneTable");
 	el.setAttribute('style', 'background-color: #008000');
 	
-	var uncheck=document.getElementsByTagName('input');
-	 for(var i=0;i<uncheck.length;i++)
-	 {
-	  if(uncheck[i].type=='checkbox')
-	  {
-	   uncheck[i].checked=false;
-	  }
-	 }
+	var td = document.getElementsByTagName("td");
+	if (td.value.isInteger()){
+		tbody.deleteRow(row.rowIndex);
+	}
+		
 }
 
 
@@ -75,7 +73,7 @@ function add(done){
 		{
 			tbody.deleteRow(row.rowIndex);
 		}
-		var alpha = row.rowIndex;
+		var alpha = row.rowIndex - 1;
 		
 		var element = document.getElementById("default");
 		if(element != null){
